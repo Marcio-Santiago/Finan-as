@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finanças — Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body>
+
+<!-- Overlay mobile -->
+<div class="overlay"></div>
+
+<!-- ─── Sidebar ─────────────────────────────────── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">💰 <span>Finanças</span></div>
+    <div class="logo-sub">Controle Pessoal</div>
+  </div>
+  <div class="sidebar-month">Janeiro · 2026</div>
+  <nav>
+    <div class="nav-label">Menu</div>
+    <a href="index.html" class="nav-item active">
+      <span class="icon">⊞</span> Dashboard
+    </a>
+    <a href="contas-gastos.html" class="nav-item">
+      <span class="icon">🏦</span> Contas & Gastos
+    </a>
+    <a href="cartoes.html" class="nav-item">
+      <span class="icon">💳</span> Cartões de Crédito
+    </a>
+    <a href="parcelamentos.html" class="nav-item">
+      <span class="icon">📦</span> Parcelamentos
+    </a>
+    <a href="reflexao.html" class="nav-item">
+      <span class="icon">🪞</span> Reflexão
+    </a>
+  </nav>
+  <div class="sidebar-footer">Atualizado: Jan 2026</div>
+</aside>
+
+<!-- ─── Main ──────────────────────────────────────── -->
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1>Dashboard Geral</h1>
+      <p>Visão consolidada das suas finanças</p>
+    </div>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+    <span class="badge badge-blue" style="display:none" id="mob-badge">Jan 2026</span>
+  </header>
+
+  <div class="content">
+
+    <!-- Summary cards -->
+    <div class="section-title">Resumo do mês</div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-label">Total Dívidas</div>
+        <div class="card-value red">R$ 1.191,25</div>
+        <div class="card-sub">4 cartões de crédito</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Crédito Utilizado</div>
+        <div class="card-value orange">R$ 4.115,33</div>
+        <div class="card-sub">de R$ 5.310,00 disponível</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Parcelamentos Restantes</div>
+        <div class="card-value red">R$ 9.565,35</div>
+        <div class="card-sub">5 contratos ativos</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Investimentos</div>
+        <div class="card-value green">R$ 121,35</div>
+        <div class="card-sub">Mercado Pago + Inter</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Gasto em Débito</div>
+        <div class="card-value blue">R$ 346,36</div>
+        <div class="card-sub">Jan 2026</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Parcelas do Mês</div>
+        <div class="card-value orange">R$ 940,77</div>
+        <div class="card-sub">5 itens em andamento</div>
+      </div>
+    </div>
+
+    <!-- Cartões quick view -->
+    <div class="section-title">Cartões de crédito — limite</div>
+    <div class="table-wrap" style="margin-bottom:24px">
+      <table>
+        <thead>
+          <tr>
+            <th>Cartão</th>
+            <th>Bandeira</th>
+            <th>Utilização</th>
+            <th class="text-right">Gasto</th>
+            <th class="text-right">Limite</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>INTER</strong> <span class="text-dim" style="font-size:.75rem;font-family:var(--mono);color:var(--text-dim)">*0531</span></td>
+            <td><span class="pill blue">Mastercard</span></td>
+            <td style="min-width:160px">
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill red" style="width:89.2%"></div></div>
+                <span class="progress-label">89%</span>
+              </div>
+            </td>
+            <td class="text-right mono red">R$ 2.862,22</td>
+            <td class="text-right mono">R$ 3.210,00</td>
+          </tr>
+          <tr>
+            <td><strong>AMAZON</strong> <span style="font-size:.75rem;font-family:var(--mono);color:var(--text-dim)">*8019</span></td>
+            <td><span class="pill blue">Mastercard</span></td>
+            <td style="min-width:160px">
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill orange" style="width:51.2%"></div></div>
+                <span class="progress-label">51%</span>
+              </div>
+            </td>
+            <td class="text-right mono orange">R$ 819,36</td>
+            <td class="text-right mono">R$ 1.600,00</td>
+          </tr>
+          <tr>
+            <td><strong>MERCADO PAGO</strong> <span style="font-size:.75rem;font-family:var(--mono);color:var(--text-dim)">*4299</span></td>
+            <td><span class="pill purple">Visa</span></td>
+            <td style="min-width:160px">
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill red" style="width:86.8%"></div></div>
+                <span class="progress-label">87%</span>
+              </div>
+            </td>
+            <td class="text-right mono red">R$ 433,75</td>
+            <td class="text-right mono">R$ 500,00</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td colspan="3">Total</td>
+            <td class="text-right red">R$ 4.115,33</td>
+            <td class="text-right">R$ 5.310,00</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Parcelamentos quick view -->
+    <div class="section-title">Parcelamentos ativos</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Instituição</th>
+            <th>Tipo</th>
+            <th class="text-right">Parcela/mês</th>
+            <th class="text-right">Falta pagar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hardware</strong></td>
+            <td>Kabum</td>
+            <td><span class="pill blue">Compra</span></td>
+            <td class="text-right mono">R$ 137,36</td>
+            <td class="text-right mono red">R$ 1.236,24</td>
+          </tr>
+          <tr>
+            <td><strong>Crédito</strong></td>
+            <td>99</td>
+            <td><span class="pill orange">Empréstimo</span></td>
+            <td class="text-right mono">R$ 366,14</td>
+            <td class="text-right mono red">R$ 4.393,68</td>
+          </tr>
+          <tr>
+            <td><strong>Batedeira</strong></td>
+            <td>Amazon</td>
+            <td><span class="pill blue">Compra</span></td>
+            <td class="text-right mono">R$ 28,50</td>
+            <td class="text-right mono orange">R$ 256,50</td>
+          </tr>
+          <tr>
+            <td><strong>Crédito</strong></td>
+            <td>Mercado Pago</td>
+            <td><span class="pill orange">Empréstimo</span></td>
+            <td class="text-right mono">R$ 394,73</td>
+            <td class="text-right mono red">R$ 3.552,57</td>
+          </tr>
+          <tr>
+            <td><strong>F1</strong></td>
+            <td>Epic</td>
+            <td><span class="pill blue">Compra</span></td>
+            <td class="text-right mono">R$ 14,04</td>
+            <td class="text-right mono green">R$ 126,36</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td colspan="3">Total mensal</td>
+            <td class="text-right orange">R$ 940,77</td>
+            <td class="text-right red">R$ 9.565,35</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

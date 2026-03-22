@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartões de Crédito — Finanças</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <style>
+    .card-grid-credit {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .credit-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 22px 18px;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .credit-card::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      opacity: .06;
+    }
+    .credit-card.inter::before    { background: var(--orange); }
+    .credit-card.amazon::before   { background: var(--blue); }
+    .credit-card.mercpago::before { background: var(--green); }
+    .credit-card:hover { border-color: var(--border-2); transform: translateY(-2px); }
+    .credit-card .cc-flag {
+      font-size: .65rem;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .credit-card .cc-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .credit-card .cc-num {
+      font-size: .72rem;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      margin-bottom: 18px;
+    }
+    .credit-card .cc-bar { margin-bottom: 14px; }
+    .credit-card .cc-bar .progress-bar { height: 7px; }
+    .credit-card .cc-amounts {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: .72rem;
+    }
+    .credit-card .cc-amounts .spent { color: var(--red); }
+    .credit-card .cc-amounts .limit { color: var(--text-dim); }
+    .credit-card .cc-amounts .free  { color: var(--green); }
+  </style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">💰 <span>Finanças</span></div>
+    <div class="logo-sub">Controle Pessoal</div>
+  </div>
+  <div class="sidebar-month">Janeiro · 2026</div>
+  <nav>
+    <div class="nav-label">Menu</div>
+    <a href="index.html" class="nav-item">
+      <span class="icon">⊞</span> Dashboard
+    </a>
+    <a href="contas-gastos.html" class="nav-item">
+      <span class="icon">🏦</span> Contas & Gastos
+    </a>
+    <a href="cartoes.html" class="nav-item active">
+      <span class="icon">💳</span> Cartões de Crédito
+    </a>
+    <a href="parcelamentos.html" class="nav-item">
+      <span class="icon">📦</span> Parcelamentos
+    </a>
+    <a href="reflexao.html" class="nav-item">
+      <span class="icon">🪞</span> Reflexão
+    </a>
+  </nav>
+  <div class="sidebar-footer">Atualizado: Jan 2026</div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1>Cartões de Crédito</h1>
+      <p>Limites, gastos e empréstimos ativos</p>
+    </div>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </header>
+
+  <div class="content">
+
+    <!-- Summary cards -->
+    <div class="section-title">Totais</div>
+    <div class="cards-grid" style="margin-bottom:28px">
+      <div class="card">
+        <div class="card-label">Limite Total</div>
+        <div class="card-value blue">R$ 5.310,00</div>
+        <div class="card-sub">3 cartões ativos</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total Gasto</div>
+        <div class="card-value red">R$ 4.115,33</div>
+        <div class="card-sub">77,5% do limite</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Limite Restante</div>
+        <div class="card-value green">R$ 1.194,67</div>
+        <div class="card-sub">Disponível agora</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Empréstimos</div>
+        <div class="card-value orange">R$ 8.837,03</div>
+        <div class="card-sub">5 cobranças pendentes</div>
+      </div>
+    </div>
+
+    <!-- Credit card visual blocks -->
+    <div class="section-title">Seus cartões</div>
+    <div class="card-grid-credit">
+
+      <div class="credit-card inter">
+        <div class="cc-flag">
+          <span style="color:var(--orange)">▲ Inter</span>
+          <span class="pill orange">Mastercard</span>
+        </div>
+        <div class="cc-name">BANCO INTER</div>
+        <div class="cc-num">•••• •••• •••• 0531</div>
+        <div class="cc-bar">
+          <div class="progress-bar">
+            <div class="progress-fill red" style="width:89.2%"></div>
+          </div>
+        </div>
+        <div class="cc-amounts">
+          <span class="spent">R$ 2.862,22 usado</span>
+          <span class="free">R$ 347,78 livre</span>
+        </div>
+      </div>
+
+      <div class="credit-card amazon">
+        <div class="cc-flag">
+          <span style="color:var(--blue)">▲ Amazon</span>
+          <span class="pill blue">Mastercard</span>
+        </div>
+        <div class="cc-name">AMAZON</div>
+        <div class="cc-num">•••• •••• •••• 8019</div>
+        <div class="cc-bar">
+          <div class="progress-bar">
+            <div class="progress-fill orange" style="width:51.2%"></div>
+          </div>
+        </div>
+        <div class="cc-amounts">
+          <span class="spent">R$ 819,36 usado</span>
+          <span class="free">R$ 780,64 livre</span>
+        </div>
+      </div>
+
+      <div class="credit-card mercpago">
+        <div class="cc-flag">
+          <span style="color:var(--green)">▲ Mercado Pago</span>
+          <span class="pill green">Visa</span>
+        </div>
+        <div class="cc-name">MERCADO PAGO</div>
+        <div class="cc-num">•••• •••• •••• 4299</div>
+        <div class="cc-bar">
+          <div class="progress-bar">
+            <div class="progress-fill red" style="width:86.8%"></div>
+          </div>
+        </div>
+        <div class="cc-amounts">
+          <span class="spent">R$ 433,75 usado</span>
+          <span class="free">R$ 66,25 livre</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Full table -->
+    <div class="section-title">Tabela detalhada</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Cartão</th>
+            <th>Bandeira</th>
+            <th>Final</th>
+            <th class="text-right">Limite</th>
+            <th class="text-right">Gasto</th>
+            <th class="text-right">Restante</th>
+            <th>Utilização</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>INTER</strong></td>
+            <td><span class="pill orange">Mastercard</span></td>
+            <td class="mono">0531</td>
+            <td class="text-right mono">R$ 3.210,00</td>
+            <td class="text-right mono red">R$ 2.862,22</td>
+            <td class="text-right mono green">R$ 347,78</td>
+            <td style="min-width:120px">
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill red" style="width:89.2%"></div></div>
+                <span class="progress-label">89%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>AMAZON</strong></td>
+            <td><span class="pill blue">Mastercard</span></td>
+            <td class="mono">8019</td>
+            <td class="text-right mono">R$ 1.600,00</td>
+            <td class="text-right mono orange">R$ 819,36</td>
+            <td class="text-right mono green">R$ 780,64</td>
+            <td style="min-width:120px">
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill orange" style="width:51.2%"></div></div>
+                <span class="progress-label">51%</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>MERCADO PAGO</strong></td>
+            <td><span class="pill purple">Visa</span></td>
+            <td class="mono">4299</td>
+            <td class="text-right mono">R$ 500,00</td>
+            <td class="text-right mono red">R$ 433,75</td>
+            <td class="text-right mono green">R$ 66,25</td>
+            <td style="min-width:120px">
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill red" style="width:86.8%"></div></div>
+                <span class="progress-label">87%</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td colspan="3">Total</td>
+            <td class="text-right">R$ 5.310,00</td>
+            <td class="text-right red">R$ 4.115,33</td>
+            <td class="text-right green">R$ 1.194,67</td>
+            <td>
+              <div class="progress-wrap">
+                <div class="progress-bar"><div class="progress-fill red" style="width:77.5%"></div></div>
+                <span class="progress-label">78%</span>
+              </div>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Empréstimos -->
+    <div class="section-title">Empréstimos & Cobranças pendentes</div>
+    <div class="table-wrap">
+      <div class="table-head">
+        <h3>Pendências a resolver</h3>
+        <span class="badge badge-red">5 itens</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Credor / Origem</th>
+            <th>Categoria</th>
+            <th>Tipo</th>
+            <th class="text-right">Valor</th>
+            <th class="text-center">Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>MoraÓtica</strong></td>
+            <td>Óculos</td>
+            <td><span class="pill blue">Crediário</span></td>
+            <td class="text-right mono orange">R$ 400,00</td>
+            <td class="text-center"><span class="pill red">Não pago</span></td>
+          </tr>
+          <tr>
+            <td><strong>Mercado Pago</strong> <span style="font-size:.75rem;color:var(--text-dim)">(Keila)</span></td>
+            <td>Keila</td>
+            <td><span class="pill orange">Empréstimo</span></td>
+            <td class="text-right mono red">R$ 4.342,03</td>
+            <td class="text-center"><span class="pill red">Não pago</span></td>
+          </tr>
+          <tr>
+            <td><strong>Keli</strong></td>
+            <td>Saúde</td>
+            <td><span class="pill purple">—</span></td>
+            <td class="text-right mono orange">R$ 505,00</td>
+            <td class="text-center"><span class="pill red">Não pago</span></td>
+          </tr>
+          <tr>
+            <td><strong>Pai</strong></td>
+            <td>Saúde</td>
+            <td><span class="pill purple">—</span></td>
+            <td class="text-right mono orange">R$ 590,00</td>
+            <td class="text-center"><span class="pill red">Não pago</span></td>
+          </tr>
+          <tr>
+            <td><strong>99</strong></td>
+            <td>Oferta</td>
+            <td><span class="pill orange">Empréstimo</span></td>
+            <td class="text-right mono red">R$ 3.000,00</td>
+            <td class="text-center"><span class="pill red">Não pago</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td colspan="3">Total pendente</td>
+            <td class="text-right red">R$ 8.837,03</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

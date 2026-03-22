@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contas & Gastos — Finanças</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">💰 <span>Finanças</span></div>
+    <div class="logo-sub">Controle Pessoal</div>
+  </div>
+  <div class="sidebar-month">Janeiro · 2026</div>
+  <nav>
+    <div class="nav-label">Menu</div>
+    <a href="index.html" class="nav-item">
+      <span class="icon">⊞</span> Dashboard
+    </a>
+    <a href="contas-gastos.html" class="nav-item active">
+      <span class="icon">🏦</span> Contas & Gastos
+    </a>
+    <a href="cartoes.html" class="nav-item">
+      <span class="icon">💳</span> Cartões de Crédito
+    </a>
+    <a href="parcelamentos.html" class="nav-item">
+      <span class="icon">📦</span> Parcelamentos
+    </a>
+    <a href="reflexao.html" class="nav-item">
+      <span class="icon">🪞</span> Reflexão
+    </a>
+  </nav>
+  <div class="sidebar-footer">Atualizado: Jan 2026</div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1>Contas & Gastos</h1>
+      <p>Dívidas, movimentações e investimentos</p>
+    </div>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </header>
+
+  <div class="content">
+
+    <!-- ── Resumo cards ── -->
+    <div class="section-title">Resumo</div>
+    <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-bottom:28px">
+      <div class="card">
+        <div class="card-label">Total Dívidas</div>
+        <div class="card-value red">R$ 1.191,25</div>
+        <div class="card-sub">Faturas janeiro</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Gastos Débito</div>
+        <div class="card-value orange">R$ 346,36</div>
+        <div class="card-sub">Total debitado</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Diferença</div>
+        <div class="card-value red">− R$ 844,89</div>
+        <div class="card-sub">Crédito − Débito</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Investimentos</div>
+        <div class="card-value green">R$ 121,35</div>
+        <div class="card-sub">Rendendo no mês</div>
+      </div>
+    </div>
+
+    <!-- ── Dívidas ── -->
+    <div class="section-title">Dívidas — Janeiro 2026</div>
+    <div class="table-wrap">
+      <div class="table-head">
+        <h3>Faturas em aberto</h3>
+        <span class="badge badge-red">Total: R$ 1.191,25</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Instituição</th>
+            <th class="text-center">Fechamento</th>
+            <th class="text-center">Vencimento</th>
+            <th class="text-right">Valor</th>
+            <th class="text-center">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Banco Inter</strong></td>
+            <td class="text-center mono">Dia 26</td>
+            <td class="text-center mono">Dia 02</td>
+            <td class="text-right mono red">R$ 366,84</td>
+            <td class="text-center"><span class="pill orange">Pendente</span></td>
+          </tr>
+          <tr>
+            <td><strong>Mercado Pago</strong></td>
+            <td class="text-center mono">Dia 29</td>
+            <td class="text-center mono">Dia 04</td>
+            <td class="text-right mono red">R$ 433,75</td>
+            <td class="text-center"><span class="pill orange">Pendente</span></td>
+          </tr>
+          <tr>
+            <td><strong>Bradesco Prime</strong></td>
+            <td class="text-center mono">Dia 22</td>
+            <td class="text-center mono">Dia 05</td>
+            <td class="text-right mono" style="color:var(--text-dim)">—</td>
+            <td class="text-center"><span class="pill blue">A verificar</span></td>
+          </tr>
+          <tr>
+            <td><strong>99</strong></td>
+            <td class="text-center mono">—</td>
+            <td class="text-center mono">Dia 25</td>
+            <td class="text-right mono red">R$ 390,66</td>
+            <td class="text-center"><span class="pill orange">Pendente</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td colspan="3">Total</td>
+            <td class="text-right red">R$ 1.191,25</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- ── Gastos Débito / Crédito ── -->
+    <div class="section-title">Bancos & Cartões — Gastos Janeiro</div>
+    <div class="two-col">
+
+      <!-- Débito -->
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Débito</h3>
+          <span class="badge badge-orange">R$ 346,36</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Banco / Origem</th>
+              <th class="text-right">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mercado Pago</td>
+              <td class="text-right mono orange">R$ 30,97</td>
+            </tr>
+            <tr>
+              <td>Inter</td>
+              <td class="text-right mono orange">R$ 90,38</td>
+            </tr>
+            <tr>
+              <td>Caixa</td>
+              <td class="text-right mono orange">R$ 75,01</td>
+            </tr>
+            <tr>
+              <td>Dinheiro</td>
+              <td class="text-right mono orange">R$ 150,00</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="tfoot-row">
+              <td>Total Débito</td>
+              <td class="text-right orange">R$ 346,36</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <!-- Crédito -->
+      <div class="table-wrap">
+        <div class="table-head">
+          <h3>Crédito</h3>
+          <span class="badge badge-blue">R$ 5.310,00</span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Banco / Cartão</th>
+              <th class="text-right">Limite</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mercado Pago</td>
+              <td class="text-right mono blue">R$ 500,00</td>
+            </tr>
+            <tr>
+              <td>Inter</td>
+              <td class="text-right mono blue">R$ 3.210,00</td>
+            </tr>
+            <tr>
+              <td>Bradesco Prime</td>
+              <td class="text-right mono blue">R$ 1.600,00</td>
+            </tr>
+            <tr>
+              <td>Banco Pan</td>
+              <td class="text-right mono" style="color:var(--text-dim)">—</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="tfoot-row">
+              <td>Total Crédito</td>
+              <td class="text-right blue">R$ 5.310,00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Pix ── -->
+    <div class="section-title">Chaves Pix cadastradas</div>
+    <div class="table-wrap">
+      <div class="table-head">
+        <h3>Meus Pix</h3>
+        <span class="badge badge-blue">6 chaves</span>
+      </div>
+      <div class="info-list">
+        <div class="info-row">
+          <span class="label">CPF</span>
+          <span class="key">Caixa Econômica</span>
+          <span class="val">39108808864</span>
+        </div>
+        <div class="info-row">
+          <span class="label">E-mail (Outlook)</span>
+          <span class="key">Banco Inter</span>
+          <span class="val">outlook.com.br</span>
+        </div>
+        <div class="info-row">
+          <span class="label">E-mail (Gmail)</span>
+          <span class="key">Itaú</span>
+          <span class="val">89gmail.com</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Celular</span>
+          <span class="key">Mercado Pago</span>
+          <span class="val">11973476653</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Chave Aleatória</span>
+          <span class="key">99</span>
+          <span class="val" style="color:var(--text-dim)">Cadastrada</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Chave Aleatória</span>
+          <span class="key">Banco Pan</span>
+          <span class="val" style="color:var(--text-dim)">Cadastrada</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Investimentos ── -->
+    <div class="section-title">Investimentos</div>
+    <div class="table-wrap">
+      <div class="table-head">
+        <h3>Rendimentos ativos</h3>
+        <span class="badge badge-green">Total: R$ 121,35</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Plataforma</th>
+            <th class="text-right">Valor investido</th>
+            <th class="text-right">Rendimento %</th>
+            <th class="text-right">Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Mercado Pago</strong></td>
+            <td class="text-right mono green">R$ 30,97</td>
+            <td class="text-right mono green">1,15%</td>
+            <td class="text-right"><span class="pill green">Ativo</span></td>
+          </tr>
+          <tr>
+            <td><strong>Inter</strong></td>
+            <td class="text-right mono green">R$ 90,38</td>
+            <td class="text-right mono green">1,00%</td>
+            <td class="text-right"><span class="pill green">Ativo</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td>Total</td>
+            <td class="text-right green">R$ 121,35</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parcelamentos — Finanças</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+  <style>
+    .parc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      transition: border-color .2s;
+    }
+    .parc-card:hover { border-color: var(--border-2); }
+    .parc-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+    .parc-card-top .left h4 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .parc-card-top .left p {
+      font-size: .73rem;
+      font-family: var(--mono);
+      color: var(--text-dim);
+    }
+    .parc-card-top .right {
+      text-align: right;
+    }
+    .parc-card-top .right .val-month {
+      font-size: .85rem;
+      font-family: var(--mono);
+      font-weight: 600;
+    }
+    .parc-card-top .right .val-rest {
+      font-size: .72rem;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      margin-top: 3px;
+    }
+    .parc-card-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .meta-chip {
+      font-size: .68rem;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 3px 10px;
+    }
+    .parc-prog-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .7rem;
+      font-family: var(--mono);
+      color: var(--text-dim);
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">💰 <span>Finanças</span></div>
+    <div class="logo-sub">Controle Pessoal</div>
+  </div>
+  <div class="sidebar-month">Janeiro · 2026</div>
+  <nav>
+    <div class="nav-label">Menu</div>
+    <a href="index.html" class="nav-item">
+      <span class="icon">⊞</span> Dashboard
+    </a>
+    <a href="contas-gastos.html" class="nav-item">
+      <span class="icon">🏦</span> Contas & Gastos
+    </a>
+    <a href="cartoes.html" class="nav-item">
+      <span class="icon">💳</span> Cartões de Crédito
+    </a>
+    <a href="parcelamentos.html" class="nav-item active">
+      <span class="icon">📦</span> Parcelamentos
+    </a>
+    <a href="reflexao.html" class="nav-item">
+      <span class="icon">🪞</span> Reflexão
+    </a>
+  </nav>
+  <div class="sidebar-footer">Atualizado: Jan 2026</div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="topbar-left">
+      <h1>Parcelamentos</h1>
+      <p>Compras parceladas e empréstimos em andamento</p>
+    </div>
+    <button class="menu-btn" aria-label="Menu">☰</button>
+  </header>
+
+  <div class="content">
+
+    <!-- Summary cards -->
+    <div class="section-title">Totais consolidados</div>
+    <div class="cards-grid" style="margin-bottom:28px">
+      <div class="card">
+        <div class="card-label">Valor Original</div>
+        <div class="card-value blue">R$ 7.749,27</div>
+        <div class="card-sub">5 contratos</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Total com juros</div>
+        <div class="card-value orange">R$ 10.921,25</div>
+        <div class="card-sub">Custo total</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Por mês</div>
+        <div class="card-value red">R$ 940,77</div>
+        <div class="card-sub">Parcelas mensais</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Já pago</div>
+        <div class="card-value green">R$ 1.355,90</div>
+        <div class="card-sub">12,4% quitado</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Ainda falta</div>
+        <div class="card-value red">R$ 9.565,35</div>
+        <div class="card-sub">87,6% restante</div>
+      </div>
+    </div>
+
+    <!-- Cards view -->
+    <div class="section-title">Detalhamento por contrato</div>
+
+    <!-- Hardware -->
+    <div class="parc-card">
+      <div class="parc-card-top">
+        <div class="left">
+          <h4>Hardware</h4>
+          <p>Kabum · Compra</p>
+        </div>
+        <div class="right">
+          <div class="val-month orange">R$ 137,36/mês</div>
+          <div class="val-rest">Falta: <span style="color:var(--red)">R$ 1.236,24</span></div>
+        </div>
+      </div>
+      <div class="parc-card-meta">
+        <span class="meta-chip">9 parcelas</span>
+        <span class="meta-chip">Valor original: R$ 1.373,67</span>
+        <span class="meta-chip">Total: R$ 1.373,67</span>
+        <span class="meta-chip">Pago: R$ 137,43</span>
+        <span class="pill blue">Compra</span>
+      </div>
+      <div class="parc-prog-label">
+        <span>Progresso — R$ 137,43 pago</span>
+        <span>10%</span>
+      </div>
+      <div class="progress-bar" style="height:8px">
+        <div class="progress-fill green" style="width:10%"></div>
+      </div>
+    </div>
+
+    <!-- Crédito 99 -->
+    <div class="parc-card">
+      <div class="parc-card-top">
+        <div class="left">
+          <h4>Crédito</h4>
+          <p>99 · Empréstimo</p>
+        </div>
+        <div class="right">
+          <div class="val-month orange">R$ 366,14/mês</div>
+          <div class="val-rest">Falta: <span style="color:var(--red)">R$ 4.393,68</span></div>
+        </div>
+      </div>
+      <div class="parc-card-meta">
+        <span class="meta-chip">12 parcelas</span>
+        <span class="meta-chip">Valor original: R$ 3.000,00</span>
+        <span class="meta-chip">Total c/ juros: R$ 4.393,68</span>
+        <span class="meta-chip">Pago: R$ 0,00</span>
+        <span class="pill orange">Empréstimo</span>
+      </div>
+      <div class="parc-prog-label">
+        <span>Progresso — R$ 0,00 pago</span>
+        <span>0%</span>
+      </div>
+      <div class="progress-bar" style="height:8px">
+        <div class="progress-fill red" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Batedeira -->
+    <div class="parc-card">
+      <div class="parc-card-top">
+        <div class="left">
+          <h4>Batedeira</h4>
+          <p>Amazon · Compra</p>
+        </div>
+        <div class="right">
+          <div class="val-month orange">R$ 28,50/mês</div>
+          <div class="val-rest">Falta: <span style="color:var(--orange)">R$ 256,50</span></div>
+        </div>
+      </div>
+      <div class="parc-card-meta">
+        <span class="meta-chip">9 parcelas</span>
+        <span class="meta-chip">Valor original: R$ 285,00</span>
+        <span class="meta-chip">Total: R$ 285,00</span>
+        <span class="meta-chip">Pago: R$ 28,50</span>
+        <span class="pill blue">Compra</span>
+      </div>
+      <div class="parc-prog-label">
+        <span>Progresso — R$ 28,50 pago</span>
+        <span>10%</span>
+      </div>
+      <div class="progress-bar" style="height:8px">
+        <div class="progress-fill green" style="width:10%"></div>
+      </div>
+    </div>
+
+    <!-- Crédito Mercado Pago -->
+    <div class="parc-card">
+      <div class="parc-card-top">
+        <div class="left">
+          <h4>Crédito</h4>
+          <p>Mercado Pago · Empréstimo</p>
+        </div>
+        <div class="right">
+          <div class="val-month orange">R$ 394,73/mês</div>
+          <div class="val-rest">Falta: <span style="color:var(--red)">R$ 3.552,57</span></div>
+        </div>
+      </div>
+      <div class="parc-card-meta">
+        <span class="meta-chip">9 parcelas</span>
+        <span class="meta-chip">Valor original: R$ 2.955,00</span>
+        <span class="meta-chip">Total c/ juros: R$ 4.728,50</span>
+        <span class="meta-chip">Pago: R$ 1.175,93</span>
+        <span class="pill orange">Empréstimo</span>
+      </div>
+      <div class="parc-prog-label">
+        <span>Progresso — R$ 1.175,93 pago</span>
+        <span>24,9%</span>
+      </div>
+      <div class="progress-bar" style="height:8px">
+        <div class="progress-fill orange" style="width:24.9%"></div>
+      </div>
+    </div>
+
+    <!-- F1 Epic -->
+    <div class="parc-card">
+      <div class="parc-card-top">
+        <div class="left">
+          <h4>F1</h4>
+          <p>Epic · Compra</p>
+        </div>
+        <div class="right">
+          <div class="val-month orange">R$ 14,04/mês</div>
+          <div class="val-rest">Falta: <span style="color:var(--green)">R$ 126,36</span></div>
+        </div>
+      </div>
+      <div class="parc-card-meta">
+        <span class="meta-chip">9 parcelas</span>
+        <span class="meta-chip">Valor original: R$ 135,60</span>
+        <span class="meta-chip">Total c/ juros: R$ 140,40</span>
+        <span class="meta-chip">Pago: R$ 14,04</span>
+        <span class="pill blue">Compra</span>
+      </div>
+      <div class="parc-prog-label">
+        <span>Progresso — R$ 14,04 pago</span>
+        <span>10%</span>
+      </div>
+      <div class="progress-bar" style="height:8px">
+        <div class="progress-fill green" style="width:10%"></div>
+      </div>
+    </div>
+
+    <!-- Summary table -->
+    <div class="section-title" style="margin-top:28px">Tabela completa</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Instituição</th>
+            <th>Tipo</th>
+            <th class="text-right">Valor inicial</th>
+            <th class="text-right">Total</th>
+            <th class="text-center">Parcelas</th>
+            <th class="text-right">Parcela/mês</th>
+            <th class="text-right">Pago</th>
+            <th class="text-right">Falta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Hardware</strong></td>
+            <td>Kabum</td>
+            <td><span class="pill blue">Compra</span></td>
+            <td class="text-right mono">R$ 1.373,67</td>
+            <td class="text-right mono">R$ 1.373,67</td>
+            <td class="text-center mono">9×</td>
+            <td class="text-right mono orange">R$ 137,36</td>
+            <td class="text-right mono green">R$ 137,43</td>
+            <td class="text-right mono red">R$ 1.236,24</td>
+          </tr>
+          <tr>
+            <td><strong>Crédito</strong></td>
+            <td>99</td>
+            <td><span class="pill orange">Empréstimo</span></td>
+            <td class="text-right mono">R$ 3.000,00</td>
+            <td class="text-right mono">R$ 4.393,68</td>
+            <td class="text-center mono">12×</td>
+            <td class="text-right mono orange">R$ 366,14</td>
+            <td class="text-right mono" style="color:var(--text-dim)">R$ 0,00</td>
+            <td class="text-right mono red">R$ 4.393,68</td>
+          </tr>
+          <tr>
+            <td><strong>Batedeira</strong></td>
+            <td>Amazon</td>
+            <td><span class="pill blue">Compra</span></td>
+            <td class="text-right mono">R$ 285,00</td>
+            <td class="text-right mono">R$ 285,00</td>
+            <td class="text-center mono">9×</td>
+            <td class="text-right mono orange">R$ 28,50</td>
+            <td class="text-right mono green">R$ 28,50</td>
+            <td class="text-right mono orange">R$ 256,50</td>
+          </tr>
+          <tr>
+            <td><strong>Crédito</strong></td>
+            <td>Mercado Pago</td>
+            <td><span class="pill orange">Empréstimo</span></td>
+            <td class="text-right mono">R$ 2.955,00</td>
+            <td class="text-right mono">R$ 4.728,50</td>
+            <td class="text-center mono">9×</td>
+            <td class="text-right mono orange">R$ 394,73</td>
+            <td class="text-right mono green">R$ 1.175,93</td>
+            <td class="text-right mono red">R$ 3.552,57</td>
+          </tr>
+          <tr>
+            <td><strong>F1</strong></td>
+            <td>Epic</td>
+            <td><span class="pill blue">Compra</span></td>
+            <td class="text-right mono">R$ 135,60</td>
+            <td class="text-right mono">R$ 140,40</td>
+            <td class="text-center mono">9×</td>
+            <td class="text-right mono orange">R$ 14,04</td>
+            <td class="text-right mono green">R$ 14,04</td>
+            <td class="text-right mono green">R$ 126,36</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="tfoot-row">
+            <td colspan="3">Totais</td>
+            <td class="text-right">R$ 7.749,27</td>
+            <td class="text-right">R$ 10.921,25</td>
+            <td></td>
+            <td class="text-right orange">R$ 940,77</td>
+            <td class="text-right green">R$ 1.355,90</td>
+            <td class="text-right red">R$ 9.565,35</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
