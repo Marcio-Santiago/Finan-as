@@ -1,131 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reflexão — Finanças</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
-  <style>
-    .hero-banner {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px 28px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-    .hero-banner .age-badge {
-      width: 70px; height: 70px;
-      border-radius: 50%;
-      background: var(--blue-dim);
-      border: 2px solid rgba(56,189,248,.3);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column;
-      flex-shrink: 0;
-    }
-    .hero-banner .age-badge .num {
-      font-family: var(--mono);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--blue);
-      line-height: 1;
-    }
-    .hero-banner .age-badge .lbl {
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .hero-banner h2 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-    .hero-banner p {
-      font-size: .82rem;
-      color: var(--text-dim);
-      line-height: 1.6;
-      max-width: 520px;
-    }
-
-    .kanban-full {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-    .kanban-col { }
-    .kanban-col-head {
-      padding: 12px 16px;
-      font-size: .7rem;
-      font-family: var(--mono);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .kanban-count {
-      background: rgba(255,255,255,.06);
-      border-radius: 99px;
-      padding: 1px 8px;
-      font-size: .65rem;
-    }
-    .kanban-item {
-      padding: 9px 16px;
-      font-size: .82rem;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-      transition: background .15s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .kanban-item::before {
-      content: '';
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .kanban-col.col-atual .kanban-item::before  { background: var(--red); }
-    .kanban-col.col-pros  .kanban-item::before  { background: var(--green); }
-    .kanban-col.col-cont  .kanban-item::before  { background: var(--orange); }
-    .kanban-col.col-prio  .kanban-item::before  { background: var(--blue); }
-    .kanban-item:last-child { border-bottom: none; }
-    .kanban-item:hover { background: var(--surface-2); }
-
-    .nota-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--blue);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      font-size: .85rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
-    .nota-box strong { color: var(--text); }
-
-    @media (max-width: 900px) {
-      .kanban-full { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 560px) {
-      .kanban-full { grid-template-columns: 1fr; }
-      .hero-banner { flex-direction: column; text-align: center; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Reflexão — Finanças</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070c15;--surface:#0d1520;--surface-2:#131e2e;--surface-3:#192438;--border:#1c2d42;--border-2:#253a52;--text:#c5d8ed;--text-dim:#4d6a85;--text-muted:#2a3f55;--green:#00d68f;--green-dim:rgba(0,214,143,.12);--red:#ff4d6a;--red-dim:rgba(255,77,106,.12);--blue:#38bdf8;--blue-dim:rgba(56,189,248,.12);--orange:#fbbf24;--orange-dim:rgba(251,191,36,.12);--purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);--nav-w:230px;--radius:10px;--radius-sm:6px;--sans:'Syne',sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;line-height:1.6}
+a{color:inherit;text-decoration:none}ul,ol{list-style:none}
+.sidebar{width:var(--nav-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s ease}
+.sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid var(--border)}
+.logo-mark{font-size:1.3rem;font-weight:800;color:var(--green);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}.logo-mark span{color:var(--text)}
+.logo-sub{font-size:.7rem;font-family:var(--mono);color:var(--text-dim);margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.sidebar-month{margin:16px 16px 8px;padding:8px 12px;background:var(--green-dim);border:1px solid rgba(0,214,143,.2);border-radius:var(--radius-sm);font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
+.sidebar nav{padding:8px 12px;flex:1}
+.nav-label{font-size:.62rem;font-family:var(--mono);color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;padding:12px 8px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:var(--text-dim);font-size:.85rem;font-weight:500;transition:all .18s;margin-bottom:2px;border:1px solid transparent}
+.nav-item:hover{background:var(--surface-2);color:var(--text)}.nav-item.active{background:var(--green-dim);color:var(--green);border-color:rgba(0,214,143,.18)}
+.nav-item .icon{width:18px;text-align:center;font-size:.95rem;flex-shrink:0}
+.sidebar-footer{padding:16px;border-top:1px solid var(--border);font-size:.7rem;font-family:var(--mono);color:var(--text-muted);text-align:center}
+.main{margin-left:var(--nav-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{padding:20px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:50}
+.topbar-left h1{font-size:1.25rem;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.topbar-left p{font-size:.75rem;font-family:var(--mono);color:var(--text-dim);margin-top:1px}
+.content{padding:28px 32px;flex:1}
+.section-title{font-size:.7rem;font-family:var(--mono);color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.hero{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:28px;display:flex;align-items:center;gap:20px}
+.age-badge{width:70px;height:70px;border-radius:50%;background:var(--blue-dim);border:2px solid rgba(56,189,248,.3);display:flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0}
+.age-badge .num{font-family:var(--mono);font-size:1.5rem;font-weight:700;color:var(--blue);line-height:1}
+.age-badge .lbl{font-family:var(--mono);font-size:.6rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
+.hero h2{font-size:1.2rem;font-weight:700;margin-bottom:5px}
+.hero p{font-size:.82rem;color:var(--text-dim);line-height:1.7;max-width:520px}
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.kcol{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.khead{padding:12px 16px;font-size:.7rem;font-family:var(--mono);font-weight:700;text-transform:uppercase;letter-spacing:2px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.khead.red{color:var(--red);background:var(--red-dim)}.khead.green{color:var(--green);background:var(--green-dim)}.khead.orange{color:var(--orange);background:var(--orange-dim)}.khead.blue{color:var(--blue);background:var(--blue-dim)}
+.kcount{background:rgba(255,255,255,.07);border-radius:99px;padding:1px 8px;font-size:.65rem}
+.kitem{padding:9px 16px;font-size:.82rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;transition:background .15s}
+.kitem:last-child{border-bottom:none}.kitem:hover{background:var(--surface-2)}
+.kitem::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.kcol.atual .kitem::before{background:var(--red)}.kcol.pros .kitem::before{background:var(--green)}.kcol.cont .kitem::before{background:var(--orange)}.kcol.prio .kitem::before{background:var(--blue)}
+.nota{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--radius);padding:18px 20px;font-size:.85rem;color:var(--text-dim);line-height:1.7}
+.nota strong{color:var(--text)}
+.menu-btn{display:none;background:var(--surface-2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:var(--radius-sm);cursor:pointer;align-items:center;justify-content:center;font-size:1.1rem}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+@media(max-width:900px){.kanban{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.overlay.open{display:block!important}.main{margin-left:0}.menu-btn{display:flex!important}.topbar{padding:14px 18px}.content{padding:18px}.kanban{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}}
+</style>
 </head>
 <body>
-
-<div class="overlay"></div>
-
-<aside class="sidebar">
+<div class="overlay" id="ov"></div>
+<aside class="sidebar" id="sb">
   <div class="sidebar-logo">
     <div class="logo-mark">💰 <span>Finanças</span></div>
     <div class="logo-sub">Controle Pessoal</div>
@@ -133,137 +63,110 @@
   <div class="sidebar-month">Janeiro · 2026</div>
   <nav>
     <div class="nav-label">Menu</div>
-    <a href="index.html" class="nav-item">
-      <span class="icon">⊞</span> Dashboard
-    </a>
-    <a href="contas-gastos.html" class="nav-item">
-      <span class="icon">🏦</span> Contas & Gastos
-    </a>
-    <a href="cartoes.html" class="nav-item">
-      <span class="icon">💳</span> Cartões de Crédito
-    </a>
-    <a href="parcelamentos.html" class="nav-item">
-      <span class="icon">📦</span> Parcelamentos
-    </a>
-    <a href="reflexao.html" class="nav-item active">
-      <span class="icon">🪞</span> Reflexão
-    </a>
+    <a href="index.html" class="nav-item"><span class="icon">⊞</span> Dashboard</a>
+    <a href="contas-gastos.html" class="nav-item"><span class="icon">🏦</span> Contas &amp; Gastos</a>
+    <a href="cartoes.html" class="nav-item"><span class="icon">💳</span> Cartões de Crédito</a>
+    <a href="parcelamentos.html" class="nav-item"><span class="icon">📦</span> Parcelamentos</a>
+    <a href="reflexao.html" class="nav-item active"><span class="icon">🪞</span> Reflexão</a>
   </nav>
   <div class="sidebar-footer">Atualizado: Jan 2026</div>
 </aside>
-
 <main class="main">
   <header class="topbar">
     <div class="topbar-left">
       <h1>Reflexão — Mudança</h1>
       <p>Situação atual, prós, contras e prioridades de vida</p>
     </div>
-    <button class="menu-btn" aria-label="Menu">☰</button>
+    <button class="menu-btn" id="mb" aria-label="Menu">☰</button>
   </header>
-
   <div class="content">
 
-    <!-- Hero -->
-    <div class="hero-banner">
-      <div class="age-badge">
-        <span class="num">36</span>
-        <span class="lbl">anos</span>
-      </div>
+    <div class="hero">
+      <div class="age-badge"><span class="num">36</span><span class="lbl">anos</span></div>
       <div>
         <h2>Reflexão sobre Mudança</h2>
         <p>Este quadro reúne seus pensamentos sobre a situação atual, os prós e contras de uma mudança e as prioridades que guiam suas decisões. Use-o como bússola nos momentos de dúvida.</p>
       </div>
     </div>
 
-    <!-- Kanban board -->
     <div class="section-title">Quadro de reflexão</div>
-    <div class="kanban-full">
+    <div class="kanban">
 
-      <!-- Atualmente -->
-      <div class="kanban-col col-atual table-wrap">
-        <div class="kanban-col-head" style="color:var(--red);background:var(--red-dim)">
-          😔 Atualmente <span class="kanban-count">18</span>
-        </div>
-        <div class="kanban-item">Medo</div>
-        <div class="kanban-item">Infelicidade</div>
-        <div class="kanban-item">Ansioso</div>
-        <div class="kanban-item">Depressivo</div>
-        <div class="kanban-item">Aprisionado</div>
-        <div class="kanban-item">Sedentarismo</div>
-        <div class="kanban-item">Insônia</div>
-        <div class="kanban-item">Moradia dos pais</div>
-        <div class="kanban-item">Dopaminérgico</div>
-        <div class="kanban-item">Dependente</div>
-        <div class="kanban-item">Disfuncional</div>
-        <div class="kanban-item">Paralisia</div>
-        <div class="kanban-item">Fraco</div>
-        <div class="kanban-item">Mental ruim</div>
-        <div class="kanban-item">Saúde ruim</div>
-        <div class="kanban-item">Sem foco estudo</div>
-        <div class="kanban-item">Fofocas</div>
+      <div class="kcol atual">
+        <div class="khead red">😔 Atualmente <span class="kcount">17</span></div>
+        <div class="kitem">Medo</div>
+        <div class="kitem">Infelicidade</div>
+        <div class="kitem">Ansioso</div>
+        <div class="kitem">Depressivo</div>
+        <div class="kitem">Aprisionado</div>
+        <div class="kitem">Sedentarismo</div>
+        <div class="kitem">Insônia</div>
+        <div class="kitem">Moradia dos pais</div>
+        <div class="kitem">Dopaminérgico</div>
+        <div class="kitem">Dependente</div>
+        <div class="kitem">Disfuncional</div>
+        <div class="kitem">Paralisia</div>
+        <div class="kitem">Fraco</div>
+        <div class="kitem">Mental ruim</div>
+        <div class="kitem">Saúde ruim</div>
+        <div class="kitem">Sem foco estudo</div>
+        <div class="kitem">Fofocas</div>
       </div>
 
-      <!-- Prós -->
-      <div class="kanban-col col-pros table-wrap">
-        <div class="kanban-col-head" style="color:var(--green);background:var(--green-dim)">
-          ✅ Prós <span class="kanban-count">16</span>
-        </div>
-        <div class="kanban-item">Independência</div>
-        <div class="kanban-item">Propósito</div>
-        <div class="kanban-item">Solitude</div>
-        <div class="kanban-item">Novo ambiente</div>
-        <div class="kanban-item">Responsabilidade</div>
-        <div class="kanban-item">Maturidade</div>
-        <div class="kanban-item">Experiência</div>
-        <div class="kanban-item">Liberdade</div>
-        <div class="kanban-item">Atividade física</div>
-        <div class="kanban-item">Saúde melhor</div>
-        <div class="kanban-item">Ficar forte</div>
-        <div class="kanban-item">Mental melhor</div>
-        <div class="kanban-item">Foco estudo</div>
-        <div class="kanban-item">Disciplina</div>
-        <div class="kanban-item">Formação</div>
+      <div class="kcol pros">
+        <div class="khead green">✅ Prós <span class="kcount">15</span></div>
+        <div class="kitem">Independência</div>
+        <div class="kitem">Propósito</div>
+        <div class="kitem">Solitude</div>
+        <div class="kitem">Novo ambiente</div>
+        <div class="kitem">Responsabilidade</div>
+        <div class="kitem">Maturidade</div>
+        <div class="kitem">Experiência</div>
+        <div class="kitem">Liberdade</div>
+        <div class="kitem">Atividade física</div>
+        <div class="kitem">Saúde melhor</div>
+        <div class="kitem">Ficar forte</div>
+        <div class="kitem">Mental melhor</div>
+        <div class="kitem">Foco estudo</div>
+        <div class="kitem">Disciplina</div>
+        <div class="kitem">Formação</div>
       </div>
 
-      <!-- Contras -->
-      <div class="kanban-col col-cont table-wrap">
-        <div class="kanban-col-head" style="color:var(--orange);background:var(--orange-dim)">
-          ⚠️ Contras <span class="kanban-count">8</span>
-        </div>
-        <div class="kanban-item">Contas a pagar</div>
-        <div class="kanban-item">Desemprego</div>
-        <div class="kanban-item">Solidão</div>
-        <div class="kanban-item">Menos tempo livre</div>
-        <div class="kanban-item">Salário baixo</div>
-        <div class="kanban-item">Medo</div>
-        <div class="kanban-item">Inexperiente</div>
-        <div class="kanban-item">Aluguel</div>
+      <div class="kcol cont">
+        <div class="khead orange">⚠️ Contras <span class="kcount">8</span></div>
+        <div class="kitem">Contas a pagar</div>
+        <div class="kitem">Desemprego</div>
+        <div class="kitem">Solidão</div>
+        <div class="kitem">Menos tempo livre</div>
+        <div class="kitem">Salário baixo</div>
+        <div class="kitem">Medo</div>
+        <div class="kitem">Inexperiente</div>
+        <div class="kitem">Aluguel</div>
       </div>
 
-      <!-- Prioridades -->
-      <div class="kanban-col col-prio table-wrap">
-        <div class="kanban-col-head" style="color:var(--blue);background:var(--blue-dim)">
-          🎯 Prioridades <span class="kanban-count">7</span>
-        </div>
-        <div class="kanban-item">Segurança</div>
-        <div class="kanban-item">Independência</div>
-        <div class="kanban-item">Saúde</div>
-        <div class="kanban-item">Mentalidade</div>
-        <div class="kanban-item">Evolução</div>
-        <div class="kanban-item">Relacionamento</div>
-        <div class="kanban-item">Profissional</div>
+      <div class="kcol prio">
+        <div class="khead blue">🎯 Prioridades <span class="kcount">7</span></div>
+        <div class="kitem">Segurança</div>
+        <div class="kitem">Independência</div>
+        <div class="kitem">Saúde</div>
+        <div class="kitem">Mentalidade</div>
+        <div class="kitem">Evolução</div>
+        <div class="kitem">Relacionamento</div>
+        <div class="kitem">Profissional</div>
       </div>
 
     </div>
 
-    <!-- Nota de reflexão -->
-    <div class="nota-box">
+    <div class="nota">
       <strong>💡 Nota pessoal:</strong> A lista de prós supera significativamente os contras. Os desafios apontados (contas, aluguel, salário) são obstáculos <em>temporários e gerenciáveis</em>, enquanto os ganhos — saúde, liberdade, propósito e foco — têm impacto profundo e duradouro na qualidade de vida. As prioridades elencadas reforçam que o caminho é de crescimento, não de conforto imediato.
     </div>
 
   </div>
 </main>
-
-<script src="js/main.js"></script>
+<script>
+const sb=document.getElementById('sb'),ov=document.getElementById('ov'),mb=document.getElementById('mb');
+mb.addEventListener('click',()=>{sb.classList.toggle('open');ov.style.display=ov.style.display==='block'?'none':'block'});
+ov.addEventListener('click',()=>{sb.classList.remove('open');ov.style.display='none'});
+</script>
 </body>
 </html>

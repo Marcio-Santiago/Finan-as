@@ -1,17 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contas & Gastos — Finanças</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contas &amp; Gastos — Finanças</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070c15;--surface:#0d1520;--surface-2:#131e2e;--surface-3:#192438;--border:#1c2d42;--border-2:#253a52;--text:#c5d8ed;--text-dim:#4d6a85;--text-muted:#2a3f55;--green:#00d68f;--green-dim:rgba(0,214,143,.12);--red:#ff4d6a;--red-dim:rgba(255,77,106,.12);--blue:#38bdf8;--blue-dim:rgba(56,189,248,.12);--orange:#fbbf24;--orange-dim:rgba(251,191,36,.12);--purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);--nav-w:230px;--radius:10px;--radius-sm:6px;--sans:'Syne',sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;line-height:1.6}
+a{color:inherit;text-decoration:none}ul,ol{list-style:none}
+.sidebar{width:var(--nav-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s ease}
+.sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid var(--border)}
+.logo-mark{font-size:1.3rem;font-weight:800;color:var(--green);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}.logo-mark span{color:var(--text)}
+.logo-sub{font-size:.7rem;font-family:var(--mono);color:var(--text-dim);margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.sidebar-month{margin:16px 16px 8px;padding:8px 12px;background:var(--green-dim);border:1px solid rgba(0,214,143,.2);border-radius:var(--radius-sm);font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
+.sidebar nav{padding:8px 12px;flex:1}
+.nav-label{font-size:.62rem;font-family:var(--mono);color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;padding:12px 8px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:var(--text-dim);font-size:.85rem;font-weight:500;transition:all .18s;margin-bottom:2px;border:1px solid transparent}
+.nav-item:hover{background:var(--surface-2);color:var(--text)}.nav-item.active{background:var(--green-dim);color:var(--green);border-color:rgba(0,214,143,.18)}
+.nav-item .icon{width:18px;text-align:center;font-size:.95rem;flex-shrink:0}
+.sidebar-footer{padding:16px;border-top:1px solid var(--border);font-size:.7rem;font-family:var(--mono);color:var(--text-muted);text-align:center}
+.main{margin-left:var(--nav-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{padding:20px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:50}
+.topbar-left h1{font-size:1.25rem;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.topbar-left p{font-size:.75rem;font-family:var(--mono);color:var(--text-dim);margin-top:1px}
+.badge{padding:5px 12px;border-radius:20px;font-size:.7rem;font-family:var(--mono);font-weight:500;letter-spacing:.5px}
+.badge-red{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,77,106,.2)}
+.badge-blue{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(56,189,248,.2)}
+.badge-orange{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(251,191,36,.2)}
+.badge-green{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,214,143,.2)}
+.content{padding:28px 32px;flex:1}
+.section-title{font-size:.7rem;font-family:var(--mono);color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:28px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:border-color .2s}
+.card:hover{border-color:var(--border-2)}
+.card-label{font-size:.68rem;font-family:var(--mono);color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.card-value{font-size:1.5rem;font-family:var(--mono);font-weight:600;line-height:1.2}
+.cv-green{color:var(--green)}.cv-red{color:var(--red)}.cv-blue{color:var(--blue)}.cv-orange{color:var(--orange)}
+.card-sub{font-size:.72rem;color:var(--text-dim);margin-top:5px;font-family:var(--mono)}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
+.table-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-head h3{font-size:.9rem;font-weight:700;color:var(--text)}
+table{width:100%;border-collapse:collapse}
+thead th{padding:10px 16px;text-align:left;font-size:.66rem;font-family:var(--mono);font-weight:500;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+thead th:first-child{padding-left:20px}thead th:last-child{padding-right:20px}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:last-child{border-bottom:none}tbody tr:hover{background:var(--surface-2)}
+tbody td{padding:11px 16px;font-size:.83rem;vertical-align:middle}
+tbody td:first-child{padding-left:20px}tbody td:last-child{padding-right:20px}
+.mono{font-family:var(--mono)}.tr{text-align:right}.tc{text-align:center}
+tfoot td{padding:11px 16px;font-weight:700;font-family:var(--mono);font-size:.82rem;background:var(--surface-3);border-top:1px solid var(--border-2)}
+tfoot td:first-child{padding-left:20px}tfoot td:last-child{padding-right:20px}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:.68rem;font-family:var(--mono);font-weight:500}
+.pill.g{background:var(--green-dim);color:var(--green)}.pill.r{background:var(--red-dim);color:var(--red)}
+.pill.b{background:var(--blue-dim);color:var(--blue)}.pill.o{background:var(--orange-dim);color:var(--orange)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.info-row{display:flex;align-items:center;justify-content:space-between;padding:9px 20px;border-bottom:1px solid var(--border);font-size:.82rem;transition:background .15s}
+.info-row:last-child{border-bottom:none}.info-row:hover{background:var(--surface-2)}
+.info-row .key{color:var(--text-dim);font-size:.75rem;font-family:var(--mono)}
+.info-row .val{font-family:var(--mono);font-size:.78rem;color:var(--blue)}
+.info-row .label{font-weight:500}
+.menu-btn{display:none;background:var(--surface-2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:var(--radius-sm);cursor:pointer;align-items:center;justify-content:center;font-size:1.1rem}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+@media(max-width:700px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.overlay.open{display:block!important}.main{margin-left:0}.menu-btn{display:flex!important}.topbar{padding:14px 18px}.content{padding:18px}.cards-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
-
-<div class="overlay"></div>
-
-<aside class="sidebar">
+<div class="overlay" id="ov"></div>
+<aside class="sidebar" id="sb">
   <div class="sidebar-logo">
     <div class="logo-mark">💰 <span>Finanças</span></div>
     <div class="logo-sub">Controle Pessoal</div>
@@ -19,288 +80,109 @@
   <div class="sidebar-month">Janeiro · 2026</div>
   <nav>
     <div class="nav-label">Menu</div>
-    <a href="index.html" class="nav-item">
-      <span class="icon">⊞</span> Dashboard
-    </a>
-    <a href="contas-gastos.html" class="nav-item active">
-      <span class="icon">🏦</span> Contas & Gastos
-    </a>
-    <a href="cartoes.html" class="nav-item">
-      <span class="icon">💳</span> Cartões de Crédito
-    </a>
-    <a href="parcelamentos.html" class="nav-item">
-      <span class="icon">📦</span> Parcelamentos
-    </a>
-    <a href="reflexao.html" class="nav-item">
-      <span class="icon">🪞</span> Reflexão
-    </a>
+    <a href="index.html" class="nav-item"><span class="icon">⊞</span> Dashboard</a>
+    <a href="contas-gastos.html" class="nav-item active"><span class="icon">🏦</span> Contas &amp; Gastos</a>
+    <a href="cartoes.html" class="nav-item"><span class="icon">💳</span> Cartões de Crédito</a>
+    <a href="parcelamentos.html" class="nav-item"><span class="icon">📦</span> Parcelamentos</a>
+    <a href="reflexao.html" class="nav-item"><span class="icon">🪞</span> Reflexão</a>
   </nav>
   <div class="sidebar-footer">Atualizado: Jan 2026</div>
 </aside>
-
 <main class="main">
   <header class="topbar">
     <div class="topbar-left">
-      <h1>Contas & Gastos</h1>
+      <h1>Contas &amp; Gastos</h1>
       <p>Dívidas, movimentações e investimentos</p>
     </div>
-    <button class="menu-btn" aria-label="Menu">☰</button>
+    <button class="menu-btn" id="mb" aria-label="Menu">☰</button>
   </header>
-
   <div class="content">
 
-    <!-- ── Resumo cards ── -->
     <div class="section-title">Resumo</div>
-    <div class="cards-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-bottom:28px">
-      <div class="card">
-        <div class="card-label">Total Dívidas</div>
-        <div class="card-value red">R$ 1.191,25</div>
-        <div class="card-sub">Faturas janeiro</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Gastos Débito</div>
-        <div class="card-value orange">R$ 346,36</div>
-        <div class="card-sub">Total debitado</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Diferença</div>
-        <div class="card-value red">− R$ 844,89</div>
-        <div class="card-sub">Crédito − Débito</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Investimentos</div>
-        <div class="card-value green">R$ 121,35</div>
-        <div class="card-sub">Rendendo no mês</div>
-      </div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-label">Total Dívidas</div><div class="card-value cv-red">R$ 1.191,25</div><div class="card-sub">Faturas janeiro</div></div>
+      <div class="card"><div class="card-label">Gastos Débito</div><div class="card-value cv-orange">R$ 346,36</div><div class="card-sub">Total debitado</div></div>
+      <div class="card"><div class="card-label">Diferença</div><div class="card-value cv-red">− R$ 844,89</div><div class="card-sub">Crédito − Débito</div></div>
+      <div class="card"><div class="card-label">Investimentos</div><div class="card-value cv-green">R$ 121,35</div><div class="card-sub">Rendendo no mês</div></div>
     </div>
 
-    <!-- ── Dívidas ── -->
     <div class="section-title">Dívidas — Janeiro 2026</div>
     <div class="table-wrap">
-      <div class="table-head">
-        <h3>Faturas em aberto</h3>
-        <span class="badge badge-red">Total: R$ 1.191,25</span>
-      </div>
+      <div class="table-head"><h3>Faturas em aberto</h3><span class="badge badge-red">Total: R$ 1.191,25</span></div>
       <table>
-        <thead>
-          <tr>
-            <th>Instituição</th>
-            <th class="text-center">Fechamento</th>
-            <th class="text-center">Vencimento</th>
-            <th class="text-right">Valor</th>
-            <th class="text-center">Status</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Instituição</th><th class="tc">Fechamento</th><th class="tc">Vencimento</th><th class="tr">Valor</th><th class="tc">Status</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Banco Inter</strong></td>
-            <td class="text-center mono">Dia 26</td>
-            <td class="text-center mono">Dia 02</td>
-            <td class="text-right mono red">R$ 366,84</td>
-            <td class="text-center"><span class="pill orange">Pendente</span></td>
-          </tr>
-          <tr>
-            <td><strong>Mercado Pago</strong></td>
-            <td class="text-center mono">Dia 29</td>
-            <td class="text-center mono">Dia 04</td>
-            <td class="text-right mono red">R$ 433,75</td>
-            <td class="text-center"><span class="pill orange">Pendente</span></td>
-          </tr>
-          <tr>
-            <td><strong>Bradesco Prime</strong></td>
-            <td class="text-center mono">Dia 22</td>
-            <td class="text-center mono">Dia 05</td>
-            <td class="text-right mono" style="color:var(--text-dim)">—</td>
-            <td class="text-center"><span class="pill blue">A verificar</span></td>
-          </tr>
-          <tr>
-            <td><strong>99</strong></td>
-            <td class="text-center mono">—</td>
-            <td class="text-center mono">Dia 25</td>
-            <td class="text-right mono red">R$ 390,66</td>
-            <td class="text-center"><span class="pill orange">Pendente</span></td>
-          </tr>
+          <tr><td><strong>Banco Inter</strong></td><td class="tc mono">Dia 26</td><td class="tc mono">Dia 02</td><td class="tr mono cv-red">R$ 366,84</td><td class="tc"><span class="pill o">Pendente</span></td></tr>
+          <tr><td><strong>Mercado Pago</strong></td><td class="tc mono">Dia 29</td><td class="tc mono">Dia 04</td><td class="tr mono cv-red">R$ 433,75</td><td class="tc"><span class="pill o">Pendente</span></td></tr>
+          <tr><td><strong>Bradesco Prime</strong></td><td class="tc mono">Dia 22</td><td class="tc mono">Dia 05</td><td class="tr mono" style="color:var(--text-dim)">—</td><td class="tc"><span class="pill b">A verificar</span></td></tr>
+          <tr><td><strong>99</strong></td><td class="tc mono">—</td><td class="tc mono">Dia 25</td><td class="tr mono cv-red">R$ 390,66</td><td class="tc"><span class="pill o">Pendente</span></td></tr>
         </tbody>
-        <tfoot>
-          <tr class="tfoot-row">
-            <td colspan="3">Total</td>
-            <td class="text-right red">R$ 1.191,25</td>
-            <td></td>
-          </tr>
-        </tfoot>
+        <tfoot><tr><td colspan="3">Total</td><td class="tr cv-red">R$ 1.191,25</td><td></td></tr></tfoot>
       </table>
     </div>
 
-    <!-- ── Gastos Débito / Crédito ── -->
-    <div class="section-title">Bancos & Cartões — Gastos Janeiro</div>
+    <div class="section-title">Bancos &amp; Cartões — Gastos Janeiro</div>
     <div class="two-col">
-
-      <!-- Débito -->
       <div class="table-wrap">
-        <div class="table-head">
-          <h3>Débito</h3>
-          <span class="badge badge-orange">R$ 346,36</span>
-        </div>
+        <div class="table-head"><h3>Débito</h3><span class="badge badge-orange">R$ 346,36</span></div>
         <table>
-          <thead>
-            <tr>
-              <th>Banco / Origem</th>
-              <th class="text-right">Valor</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Banco / Origem</th><th class="tr">Valor</th></tr></thead>
           <tbody>
-            <tr>
-              <td>Mercado Pago</td>
-              <td class="text-right mono orange">R$ 30,97</td>
-            </tr>
-            <tr>
-              <td>Inter</td>
-              <td class="text-right mono orange">R$ 90,38</td>
-            </tr>
-            <tr>
-              <td>Caixa</td>
-              <td class="text-right mono orange">R$ 75,01</td>
-            </tr>
-            <tr>
-              <td>Dinheiro</td>
-              <td class="text-right mono orange">R$ 150,00</td>
-            </tr>
+            <tr><td>Mercado Pago</td><td class="tr mono cv-orange">R$ 30,97</td></tr>
+            <tr><td>Inter</td><td class="tr mono cv-orange">R$ 90,38</td></tr>
+            <tr><td>Caixa</td><td class="tr mono cv-orange">R$ 75,01</td></tr>
+            <tr><td>Dinheiro</td><td class="tr mono cv-orange">R$ 150,00</td></tr>
           </tbody>
-          <tfoot>
-            <tr class="tfoot-row">
-              <td>Total Débito</td>
-              <td class="text-right orange">R$ 346,36</td>
-            </tr>
-          </tfoot>
+          <tfoot><tr><td>Total Débito</td><td class="tr cv-orange">R$ 346,36</td></tr></tfoot>
         </table>
       </div>
-
-      <!-- Crédito -->
       <div class="table-wrap">
-        <div class="table-head">
-          <h3>Crédito</h3>
-          <span class="badge badge-blue">R$ 5.310,00</span>
-        </div>
+        <div class="table-head"><h3>Crédito</h3><span class="badge badge-blue">R$ 5.310,00</span></div>
         <table>
-          <thead>
-            <tr>
-              <th>Banco / Cartão</th>
-              <th class="text-right">Limite</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Banco / Cartão</th><th class="tr">Limite</th></tr></thead>
           <tbody>
-            <tr>
-              <td>Mercado Pago</td>
-              <td class="text-right mono blue">R$ 500,00</td>
-            </tr>
-            <tr>
-              <td>Inter</td>
-              <td class="text-right mono blue">R$ 3.210,00</td>
-            </tr>
-            <tr>
-              <td>Bradesco Prime</td>
-              <td class="text-right mono blue">R$ 1.600,00</td>
-            </tr>
-            <tr>
-              <td>Banco Pan</td>
-              <td class="text-right mono" style="color:var(--text-dim)">—</td>
-            </tr>
+            <tr><td>Mercado Pago</td><td class="tr mono cv-blue">R$ 500,00</td></tr>
+            <tr><td>Inter</td><td class="tr mono cv-blue">R$ 3.210,00</td></tr>
+            <tr><td>Bradesco Prime</td><td class="tr mono cv-blue">R$ 1.600,00</td></tr>
+            <tr><td>Banco Pan</td><td class="tr mono" style="color:var(--text-dim)">—</td></tr>
           </tbody>
-          <tfoot>
-            <tr class="tfoot-row">
-              <td>Total Crédito</td>
-              <td class="text-right blue">R$ 5.310,00</td>
-            </tr>
-          </tfoot>
+          <tfoot><tr><td>Total Crédito</td><td class="tr cv-blue">R$ 5.310,00</td></tr></tfoot>
         </table>
       </div>
     </div>
 
-    <!-- ── Pix ── -->
     <div class="section-title">Chaves Pix cadastradas</div>
     <div class="table-wrap">
-      <div class="table-head">
-        <h3>Meus Pix</h3>
-        <span class="badge badge-blue">6 chaves</span>
-      </div>
-      <div class="info-list">
-        <div class="info-row">
-          <span class="label">CPF</span>
-          <span class="key">Caixa Econômica</span>
-          <span class="val">39108808864</span>
-        </div>
-        <div class="info-row">
-          <span class="label">E-mail (Outlook)</span>
-          <span class="key">Banco Inter</span>
-          <span class="val">outlook.com.br</span>
-        </div>
-        <div class="info-row">
-          <span class="label">E-mail (Gmail)</span>
-          <span class="key">Itaú</span>
-          <span class="val">89gmail.com</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Celular</span>
-          <span class="key">Mercado Pago</span>
-          <span class="val">11973476653</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Chave Aleatória</span>
-          <span class="key">99</span>
-          <span class="val" style="color:var(--text-dim)">Cadastrada</span>
-        </div>
-        <div class="info-row">
-          <span class="label">Chave Aleatória</span>
-          <span class="key">Banco Pan</span>
-          <span class="val" style="color:var(--text-dim)">Cadastrada</span>
-        </div>
+      <div class="table-head"><h3>Meus Pix</h3><span class="badge badge-blue">6 chaves</span></div>
+      <div>
+        <div class="info-row"><span class="label">CPF</span><span class="key">Caixa Econômica</span><span class="val">39108808864</span></div>
+        <div class="info-row"><span class="label">E-mail (Outlook)</span><span class="key">Banco Inter</span><span class="val">outlook.com.br</span></div>
+        <div class="info-row"><span class="label">E-mail (Gmail)</span><span class="key">Itaú</span><span class="val">89gmail.com</span></div>
+        <div class="info-row"><span class="label">Celular</span><span class="key">Mercado Pago</span><span class="val">11973476653</span></div>
+        <div class="info-row"><span class="label">Chave Aleatória</span><span class="key">99</span><span class="val" style="color:var(--text-dim)">Cadastrada</span></div>
+        <div class="info-row"><span class="label">Chave Aleatória</span><span class="key">Banco Pan</span><span class="val" style="color:var(--text-dim)">Cadastrada</span></div>
       </div>
     </div>
 
-    <!-- ── Investimentos ── -->
     <div class="section-title">Investimentos</div>
     <div class="table-wrap">
-      <div class="table-head">
-        <h3>Rendimentos ativos</h3>
-        <span class="badge badge-green">Total: R$ 121,35</span>
-      </div>
+      <div class="table-head"><h3>Rendimentos ativos</h3><span class="badge badge-green">Total: R$ 121,35</span></div>
       <table>
-        <thead>
-          <tr>
-            <th>Plataforma</th>
-            <th class="text-right">Valor investido</th>
-            <th class="text-right">Rendimento %</th>
-            <th class="text-right">Situação</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Plataforma</th><th class="tr">Valor investido</th><th class="tr">Rendimento %</th><th class="tr">Situação</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>Mercado Pago</strong></td>
-            <td class="text-right mono green">R$ 30,97</td>
-            <td class="text-right mono green">1,15%</td>
-            <td class="text-right"><span class="pill green">Ativo</span></td>
-          </tr>
-          <tr>
-            <td><strong>Inter</strong></td>
-            <td class="text-right mono green">R$ 90,38</td>
-            <td class="text-right mono green">1,00%</td>
-            <td class="text-right"><span class="pill green">Ativo</span></td>
-          </tr>
+          <tr><td><strong>Mercado Pago</strong></td><td class="tr mono cv-green">R$ 30,97</td><td class="tr mono cv-green">1,15%</td><td class="tr"><span class="pill g">Ativo</span></td></tr>
+          <tr><td><strong>Inter</strong></td><td class="tr mono cv-green">R$ 90,38</td><td class="tr mono cv-green">1,00%</td><td class="tr"><span class="pill g">Ativo</span></td></tr>
         </tbody>
-        <tfoot>
-          <tr class="tfoot-row">
-            <td>Total</td>
-            <td class="text-right green">R$ 121,35</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tfoot>
+        <tfoot><tr><td>Total</td><td class="tr cv-green">R$ 121,35</td><td></td><td></td></tr></tfoot>
       </table>
     </div>
 
   </div>
 </main>
-
-<script src="js/main.js"></script>
+<script>
+const sb=document.getElementById('sb'),ov=document.getElementById('ov'),mb=document.getElementById('mb');
+mb.addEventListener('click',()=>{sb.classList.toggle('open');ov.style.display=ov.style.display==='block'?'none':'block'});
+ov.addEventListener('click',()=>{sb.classList.remove('open');ov.style.display='none'});
+</script>
 </body>
 </html>

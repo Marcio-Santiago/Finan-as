@@ -1,78 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cartões de Crédito — Finanças</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
-  <style>
-    .card-grid-credit {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-    .credit-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 22px 18px;
-      transition: border-color .2s, transform .2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .credit-card::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      opacity: .06;
-    }
-    .credit-card.inter::before    { background: var(--orange); }
-    .credit-card.amazon::before   { background: var(--blue); }
-    .credit-card.mercpago::before { background: var(--green); }
-    .credit-card:hover { border-color: var(--border-2); transform: translateY(-2px); }
-    .credit-card .cc-flag {
-      font-size: .65rem;
-      font-family: var(--mono);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .credit-card .cc-name {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-    .credit-card .cc-num {
-      font-size: .72rem;
-      font-family: var(--mono);
-      color: var(--text-dim);
-      margin-bottom: 18px;
-    }
-    .credit-card .cc-bar { margin-bottom: 14px; }
-    .credit-card .cc-bar .progress-bar { height: 7px; }
-    .credit-card .cc-amounts {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: .72rem;
-    }
-    .credit-card .cc-amounts .spent { color: var(--red); }
-    .credit-card .cc-amounts .limit { color: var(--text-dim); }
-    .credit-card .cc-amounts .free  { color: var(--green); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cartões de Crédito — Finanças</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💰</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070c15;--surface:#0d1520;--surface-2:#131e2e;--surface-3:#192438;--border:#1c2d42;--border-2:#253a52;--text:#c5d8ed;--text-dim:#4d6a85;--text-muted:#2a3f55;--green:#00d68f;--green-dim:rgba(0,214,143,.12);--red:#ff4d6a;--red-dim:rgba(255,77,106,.12);--blue:#38bdf8;--blue-dim:rgba(56,189,248,.12);--orange:#fbbf24;--orange-dim:rgba(251,191,36,.12);--purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);--nav-w:230px;--radius:10px;--radius-sm:6px;--sans:'Syne',sans-serif;--mono:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;line-height:1.6}
+a{color:inherit;text-decoration:none}ul,ol{list-style:none}
+.sidebar{width:var(--nav-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:100;transition:transform .3s ease}
+.sidebar-logo{padding:24px 20px 20px;border-bottom:1px solid var(--border)}
+.logo-mark{font-size:1.3rem;font-weight:800;color:var(--green);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}.logo-mark span{color:var(--text)}
+.logo-sub{font-size:.7rem;font-family:var(--mono);color:var(--text-dim);margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.sidebar-month{margin:16px 16px 8px;padding:8px 12px;background:var(--green-dim);border:1px solid rgba(0,214,143,.2);border-radius:var(--radius-sm);font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--green);text-transform:uppercase;letter-spacing:1.5px;text-align:center}
+.sidebar nav{padding:8px 12px;flex:1}
+.nav-label{font-size:.62rem;font-family:var(--mono);color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;padding:12px 8px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:var(--text-dim);font-size:.85rem;font-weight:500;transition:all .18s;margin-bottom:2px;border:1px solid transparent}
+.nav-item:hover{background:var(--surface-2);color:var(--text)}.nav-item.active{background:var(--green-dim);color:var(--green);border-color:rgba(0,214,143,.18)}
+.nav-item .icon{width:18px;text-align:center;font-size:.95rem;flex-shrink:0}
+.sidebar-footer{padding:16px;border-top:1px solid var(--border);font-size:.7rem;font-family:var(--mono);color:var(--text-muted);text-align:center}
+.main{margin-left:var(--nav-w);flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{padding:20px 32px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:50}
+.topbar-left h1{font-size:1.25rem;font-weight:700;color:var(--text);letter-spacing:-.3px}
+.topbar-left p{font-size:.75rem;font-family:var(--mono);color:var(--text-dim);margin-top:1px}
+.badge{padding:5px 12px;border-radius:20px;font-size:.7rem;font-family:var(--mono);font-weight:500;letter-spacing:.5px}
+.badge-red{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,77,106,.2)}
+.badge-blue{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(56,189,248,.2)}
+.badge-orange{background:var(--orange-dim);color:var(--orange);border:1px solid rgba(251,191,36,.2)}
+.badge-green{background:var(--green-dim);color:var(--green);border:1px solid rgba(0,214,143,.2)}
+.content{padding:28px 32px;flex:1}
+.section-title{font-size:.7rem;font-family:var(--mono);color:var(--text-dim);text-transform:uppercase;letter-spacing:2px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:28px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:border-color .2s}
+.card:hover{border-color:var(--border-2)}
+.card-label{font-size:.68rem;font-family:var(--mono);color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.card-value{font-size:1.5rem;font-family:var(--mono);font-weight:600;line-height:1.2}
+.cv-green{color:var(--green)}.cv-red{color:var(--red)}.cv-blue{color:var(--blue)}.cv-orange{color:var(--orange)}
+.card-sub{font-size:.72rem;color:var(--text-dim);margin-top:5px;font-family:var(--mono)}
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px}
+.table-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.table-head h3{font-size:.9rem;font-weight:700;color:var(--text)}
+table{width:100%;border-collapse:collapse}
+thead th{padding:10px 16px;text-align:left;font-size:.66rem;font-family:var(--mono);font-weight:500;color:var(--text-dim);text-transform:uppercase;letter-spacing:1.5px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+thead th:first-child{padding-left:20px}thead th:last-child{padding-right:20px}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:last-child{border-bottom:none}tbody tr:hover{background:var(--surface-2)}
+tbody td{padding:11px 16px;font-size:.83rem;vertical-align:middle}
+tbody td:first-child{padding-left:20px}tbody td:last-child{padding-right:20px}
+.mono{font-family:var(--mono)}.tr{text-align:right}.tc{text-align:center}
+tfoot td{padding:11px 16px;font-weight:700;font-family:var(--mono);font-size:.82rem;background:var(--surface-3);border-top:1px solid var(--border-2)}
+tfoot td:first-child{padding-left:20px}tfoot td:last-child{padding-right:20px}
+.pw{display:flex;align-items:center;gap:10px}.pb{flex:1;height:5px;background:var(--surface-3);border-radius:99px;overflow:hidden}
+.pf{height:100%;border-radius:99px;transition:width .6s ease}.pf.g{background:var(--green)}.pf.r{background:var(--red)}.pf.o{background:var(--orange)}
+.pl{font-family:var(--mono);font-size:.7rem;color:var(--text-dim);min-width:36px;text-align:right}
+.pill{display:inline-block;padding:3px 9px;border-radius:99px;font-size:.68rem;font-family:var(--mono);font-weight:500}
+.pill.g{background:var(--green-dim);color:var(--green)}.pill.r{background:var(--red-dim);color:var(--red)}
+.pill.b{background:var(--blue-dim);color:var(--blue)}.pill.o{background:var(--orange-dim);color:var(--orange)}.pill.p{background:var(--purple-dim);color:var(--purple)}
+.cc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:28px}
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 22px 18px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.cc::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;opacity:.06}
+.cc.inter::before{background:var(--orange)}.cc.amz::before{background:var(--blue)}.cc.mp::before{background:var(--green)}
+.cc:hover{border-color:var(--border-2);transform:translateY(-2px)}
+.cc-flag{font-size:.65rem;font-family:var(--mono);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.cc-name{font-size:1rem;font-weight:700;margin-bottom:2px}
+.cc-num{font-size:.72rem;font-family:var(--mono);color:var(--text-dim);margin-bottom:18px}
+.cc-bar{margin-bottom:12px}.cc-bar .pb{height:7px}
+.cc-amounts{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.72rem}
+.cc-spent{color:var(--red)}.cc-free{color:var(--green)}
+.menu-btn{display:none;background:var(--surface-2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:var(--radius-sm);cursor:pointer;align-items:center;justify-content:center;font-size:1.1rem}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:99}
+@media(max-width:700px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.overlay.open{display:block!important}.main{margin-left:0}.menu-btn{display:flex!important}.topbar{padding:14px 18px}.content{padding:18px}.cards-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
-
-<div class="overlay"></div>
-
-<aside class="sidebar">
+<div class="overlay" id="ov"></div>
+<aside class="sidebar" id="sb">
   <div class="sidebar-logo">
     <div class="logo-mark">💰 <span>Finanças</span></div>
     <div class="logo-sub">Controle Pessoal</div>
@@ -80,264 +87,93 @@
   <div class="sidebar-month">Janeiro · 2026</div>
   <nav>
     <div class="nav-label">Menu</div>
-    <a href="index.html" class="nav-item">
-      <span class="icon">⊞</span> Dashboard
-    </a>
-    <a href="contas-gastos.html" class="nav-item">
-      <span class="icon">🏦</span> Contas & Gastos
-    </a>
-    <a href="cartoes.html" class="nav-item active">
-      <span class="icon">💳</span> Cartões de Crédito
-    </a>
-    <a href="parcelamentos.html" class="nav-item">
-      <span class="icon">📦</span> Parcelamentos
-    </a>
-    <a href="reflexao.html" class="nav-item">
-      <span class="icon">🪞</span> Reflexão
-    </a>
+    <a href="index.html" class="nav-item"><span class="icon">⊞</span> Dashboard</a>
+    <a href="contas-gastos.html" class="nav-item"><span class="icon">🏦</span> Contas &amp; Gastos</a>
+    <a href="cartoes.html" class="nav-item active"><span class="icon">💳</span> Cartões de Crédito</a>
+    <a href="parcelamentos.html" class="nav-item"><span class="icon">📦</span> Parcelamentos</a>
+    <a href="reflexao.html" class="nav-item"><span class="icon">🪞</span> Reflexão</a>
   </nav>
   <div class="sidebar-footer">Atualizado: Jan 2026</div>
 </aside>
-
 <main class="main">
   <header class="topbar">
     <div class="topbar-left">
       <h1>Cartões de Crédito</h1>
       <p>Limites, gastos e empréstimos ativos</p>
     </div>
-    <button class="menu-btn" aria-label="Menu">☰</button>
+    <button class="menu-btn" id="mb" aria-label="Menu">☰</button>
   </header>
-
   <div class="content">
 
-    <!-- Summary cards -->
     <div class="section-title">Totais</div>
-    <div class="cards-grid" style="margin-bottom:28px">
-      <div class="card">
-        <div class="card-label">Limite Total</div>
-        <div class="card-value blue">R$ 5.310,00</div>
-        <div class="card-sub">3 cartões ativos</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Total Gasto</div>
-        <div class="card-value red">R$ 4.115,33</div>
-        <div class="card-sub">77,5% do limite</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Limite Restante</div>
-        <div class="card-value green">R$ 1.194,67</div>
-        <div class="card-sub">Disponível agora</div>
-      </div>
-      <div class="card">
-        <div class="card-label">Empréstimos</div>
-        <div class="card-value orange">R$ 8.837,03</div>
-        <div class="card-sub">5 cobranças pendentes</div>
-      </div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-label">Limite Total</div><div class="card-value cv-blue">R$ 5.310,00</div><div class="card-sub">3 cartões ativos</div></div>
+      <div class="card"><div class="card-label">Total Gasto</div><div class="card-value cv-red">R$ 4.115,33</div><div class="card-sub">77,5% do limite</div></div>
+      <div class="card"><div class="card-label">Limite Restante</div><div class="card-value cv-green">R$ 1.194,67</div><div class="card-sub">Disponível agora</div></div>
+      <div class="card"><div class="card-label">Empréstimos</div><div class="card-value cv-orange">R$ 8.837,03</div><div class="card-sub">5 cobranças pendentes</div></div>
     </div>
 
-    <!-- Credit card visual blocks -->
     <div class="section-title">Seus cartões</div>
-    <div class="card-grid-credit">
-
-      <div class="credit-card inter">
-        <div class="cc-flag">
-          <span style="color:var(--orange)">▲ Inter</span>
-          <span class="pill orange">Mastercard</span>
-        </div>
+    <div class="cc-grid">
+      <div class="cc inter">
+        <div class="cc-flag"><span style="color:var(--orange)">▲ Inter</span><span class="pill o">Mastercard</span></div>
         <div class="cc-name">BANCO INTER</div>
         <div class="cc-num">•••• •••• •••• 0531</div>
-        <div class="cc-bar">
-          <div class="progress-bar">
-            <div class="progress-fill red" style="width:89.2%"></div>
-          </div>
-        </div>
-        <div class="cc-amounts">
-          <span class="spent">R$ 2.862,22 usado</span>
-          <span class="free">R$ 347,78 livre</span>
-        </div>
+        <div class="cc-bar"><div class="pb"><div class="pf r" data-w="89%"></div></div></div>
+        <div class="cc-amounts"><span class="cc-spent">R$ 2.862,22 usado</span><span class="cc-free">R$ 347,78 livre</span></div>
       </div>
-
-      <div class="credit-card amazon">
-        <div class="cc-flag">
-          <span style="color:var(--blue)">▲ Amazon</span>
-          <span class="pill blue">Mastercard</span>
-        </div>
+      <div class="cc amz">
+        <div class="cc-flag"><span style="color:var(--blue)">▲ Amazon</span><span class="pill b">Mastercard</span></div>
         <div class="cc-name">AMAZON</div>
         <div class="cc-num">•••• •••• •••• 8019</div>
-        <div class="cc-bar">
-          <div class="progress-bar">
-            <div class="progress-fill orange" style="width:51.2%"></div>
-          </div>
-        </div>
-        <div class="cc-amounts">
-          <span class="spent">R$ 819,36 usado</span>
-          <span class="free">R$ 780,64 livre</span>
-        </div>
+        <div class="cc-bar"><div class="pb"><div class="pf o" data-w="51%"></div></div></div>
+        <div class="cc-amounts"><span class="cc-spent">R$ 819,36 usado</span><span class="cc-free">R$ 780,64 livre</span></div>
       </div>
-
-      <div class="credit-card mercpago">
-        <div class="cc-flag">
-          <span style="color:var(--green)">▲ Mercado Pago</span>
-          <span class="pill green">Visa</span>
-        </div>
+      <div class="cc mp">
+        <div class="cc-flag"><span style="color:var(--green)">▲ Mercado Pago</span><span class="pill g">Visa</span></div>
         <div class="cc-name">MERCADO PAGO</div>
         <div class="cc-num">•••• •••• •••• 4299</div>
-        <div class="cc-bar">
-          <div class="progress-bar">
-            <div class="progress-fill red" style="width:86.8%"></div>
-          </div>
-        </div>
-        <div class="cc-amounts">
-          <span class="spent">R$ 433,75 usado</span>
-          <span class="free">R$ 66,25 livre</span>
-        </div>
+        <div class="cc-bar"><div class="pb"><div class="pf r" data-w="87%"></div></div></div>
+        <div class="cc-amounts"><span class="cc-spent">R$ 433,75 usado</span><span class="cc-free">R$ 66,25 livre</span></div>
       </div>
-
     </div>
 
-    <!-- Full table -->
     <div class="section-title">Tabela detalhada</div>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Cartão</th>
-            <th>Bandeira</th>
-            <th>Final</th>
-            <th class="text-right">Limite</th>
-            <th class="text-right">Gasto</th>
-            <th class="text-right">Restante</th>
-            <th>Utilização</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Cartão</th><th>Bandeira</th><th>Final</th><th class="tr">Limite</th><th class="tr">Gasto</th><th class="tr">Restante</th><th>Utilização</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>INTER</strong></td>
-            <td><span class="pill orange">Mastercard</span></td>
-            <td class="mono">0531</td>
-            <td class="text-right mono">R$ 3.210,00</td>
-            <td class="text-right mono red">R$ 2.862,22</td>
-            <td class="text-right mono green">R$ 347,78</td>
-            <td style="min-width:120px">
-              <div class="progress-wrap">
-                <div class="progress-bar"><div class="progress-fill red" style="width:89.2%"></div></div>
-                <span class="progress-label">89%</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>AMAZON</strong></td>
-            <td><span class="pill blue">Mastercard</span></td>
-            <td class="mono">8019</td>
-            <td class="text-right mono">R$ 1.600,00</td>
-            <td class="text-right mono orange">R$ 819,36</td>
-            <td class="text-right mono green">R$ 780,64</td>
-            <td style="min-width:120px">
-              <div class="progress-wrap">
-                <div class="progress-bar"><div class="progress-fill orange" style="width:51.2%"></div></div>
-                <span class="progress-label">51%</span>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><strong>MERCADO PAGO</strong></td>
-            <td><span class="pill purple">Visa</span></td>
-            <td class="mono">4299</td>
-            <td class="text-right mono">R$ 500,00</td>
-            <td class="text-right mono red">R$ 433,75</td>
-            <td class="text-right mono green">R$ 66,25</td>
-            <td style="min-width:120px">
-              <div class="progress-wrap">
-                <div class="progress-bar"><div class="progress-fill red" style="width:86.8%"></div></div>
-                <span class="progress-label">87%</span>
-              </div>
-            </td>
-          </tr>
+          <tr><td><strong>INTER</strong></td><td><span class="pill o">Mastercard</span></td><td class="mono">0531</td><td class="tr mono">R$ 3.210,00</td><td class="tr mono cv-red">R$ 2.862,22</td><td class="tr mono cv-green">R$ 347,78</td><td style="min-width:130px"><div class="pw"><div class="pb"><div class="pf r" data-w="89%"></div></div><span class="pl">89%</span></div></td></tr>
+          <tr><td><strong>AMAZON</strong></td><td><span class="pill b">Mastercard</span></td><td class="mono">8019</td><td class="tr mono">R$ 1.600,00</td><td class="tr mono cv-orange">R$ 819,36</td><td class="tr mono cv-green">R$ 780,64</td><td style="min-width:130px"><div class="pw"><div class="pb"><div class="pf o" data-w="51%"></div></div><span class="pl">51%</span></div></td></tr>
+          <tr><td><strong>MERCADO PAGO</strong></td><td><span class="pill p">Visa</span></td><td class="mono">4299</td><td class="tr mono">R$ 500,00</td><td class="tr mono cv-red">R$ 433,75</td><td class="tr mono cv-green">R$ 66,25</td><td style="min-width:130px"><div class="pw"><div class="pb"><div class="pf r" data-w="87%"></div></div><span class="pl">87%</span></div></td></tr>
         </tbody>
-        <tfoot>
-          <tr class="tfoot-row">
-            <td colspan="3">Total</td>
-            <td class="text-right">R$ 5.310,00</td>
-            <td class="text-right red">R$ 4.115,33</td>
-            <td class="text-right green">R$ 1.194,67</td>
-            <td>
-              <div class="progress-wrap">
-                <div class="progress-bar"><div class="progress-fill red" style="width:77.5%"></div></div>
-                <span class="progress-label">78%</span>
-              </div>
-            </td>
-          </tr>
-        </tfoot>
+        <tfoot><tr><td colspan="3">Total</td><td class="tr">R$ 5.310,00</td><td class="tr cv-red">R$ 4.115,33</td><td class="tr cv-green">R$ 1.194,67</td><td><div class="pw"><div class="pb"><div class="pf r" data-w="78%"></div></div><span class="pl">78%</span></div></td></tr></tfoot>
       </table>
     </div>
 
-    <!-- Empréstimos -->
-    <div class="section-title">Empréstimos & Cobranças pendentes</div>
+    <div class="section-title">Empréstimos &amp; Cobranças pendentes</div>
     <div class="table-wrap">
-      <div class="table-head">
-        <h3>Pendências a resolver</h3>
-        <span class="badge badge-red">5 itens</span>
-      </div>
+      <div class="table-head"><h3>Pendências a resolver</h3><span class="badge badge-red">5 itens</span></div>
       <table>
-        <thead>
-          <tr>
-            <th>Credor / Origem</th>
-            <th>Categoria</th>
-            <th>Tipo</th>
-            <th class="text-right">Valor</th>
-            <th class="text-center">Situação</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Credor</th><th>Categoria</th><th>Tipo</th><th class="tr">Valor</th><th class="tc">Situação</th></tr></thead>
         <tbody>
-          <tr>
-            <td><strong>MoraÓtica</strong></td>
-            <td>Óculos</td>
-            <td><span class="pill blue">Crediário</span></td>
-            <td class="text-right mono orange">R$ 400,00</td>
-            <td class="text-center"><span class="pill red">Não pago</span></td>
-          </tr>
-          <tr>
-            <td><strong>Mercado Pago</strong> <span style="font-size:.75rem;color:var(--text-dim)">(Keila)</span></td>
-            <td>Keila</td>
-            <td><span class="pill orange">Empréstimo</span></td>
-            <td class="text-right mono red">R$ 4.342,03</td>
-            <td class="text-center"><span class="pill red">Não pago</span></td>
-          </tr>
-          <tr>
-            <td><strong>Keli</strong></td>
-            <td>Saúde</td>
-            <td><span class="pill purple">—</span></td>
-            <td class="text-right mono orange">R$ 505,00</td>
-            <td class="text-center"><span class="pill red">Não pago</span></td>
-          </tr>
-          <tr>
-            <td><strong>Pai</strong></td>
-            <td>Saúde</td>
-            <td><span class="pill purple">—</span></td>
-            <td class="text-right mono orange">R$ 590,00</td>
-            <td class="text-center"><span class="pill red">Não pago</span></td>
-          </tr>
-          <tr>
-            <td><strong>99</strong></td>
-            <td>Oferta</td>
-            <td><span class="pill orange">Empréstimo</span></td>
-            <td class="text-right mono red">R$ 3.000,00</td>
-            <td class="text-center"><span class="pill red">Não pago</span></td>
-          </tr>
+          <tr><td><strong>MoraÓtica</strong></td><td>Óculos</td><td><span class="pill b">Crediário</span></td><td class="tr mono cv-orange">R$ 400,00</td><td class="tc"><span class="pill r">Não pago</span></td></tr>
+          <tr><td><strong>Mercado Pago</strong> <span style="font-size:.75rem;color:var(--text-dim)">(Keila)</span></td><td>Keila</td><td><span class="pill o">Empréstimo</span></td><td class="tr mono cv-red">R$ 4.342,03</td><td class="tc"><span class="pill r">Não pago</span></td></tr>
+          <tr><td><strong>Keli</strong></td><td>Saúde</td><td><span class="pill p">—</span></td><td class="tr mono cv-orange">R$ 505,00</td><td class="tc"><span class="pill r">Não pago</span></td></tr>
+          <tr><td><strong>Pai</strong></td><td>Saúde</td><td><span class="pill p">—</span></td><td class="tr mono cv-orange">R$ 590,00</td><td class="tc"><span class="pill r">Não pago</span></td></tr>
+          <tr><td><strong>99</strong></td><td>Oferta</td><td><span class="pill o">Empréstimo</span></td><td class="tr mono cv-red">R$ 3.000,00</td><td class="tc"><span class="pill r">Não pago</span></td></tr>
         </tbody>
-        <tfoot>
-          <tr class="tfoot-row">
-            <td colspan="3">Total pendente</td>
-            <td class="text-right red">R$ 8.837,03</td>
-            <td></td>
-          </tr>
-        </tfoot>
+        <tfoot><tr><td colspan="3">Total pendente</td><td class="tr cv-red">R$ 8.837,03</td><td></td></tr></tfoot>
       </table>
     </div>
 
   </div>
 </main>
-
-<script src="js/main.js"></script>
+<script>
+const sb=document.getElementById('sb'),ov=document.getElementById('ov'),mb=document.getElementById('mb');
+mb.addEventListener('click',()=>{sb.classList.toggle('open');ov.style.display=ov.style.display==='block'?'none':'block'});
+ov.addEventListener('click',()=>{sb.classList.remove('open');ov.style.display='none'});
+window.addEventListener('load',()=>{document.querySelectorAll('.pf[data-w]').forEach(el=>{const w=el.dataset.w;el.style.width='0';setTimeout(()=>el.style.width=w,120)})});
+</script>
 </body>
 </html>
